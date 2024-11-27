@@ -27,14 +27,52 @@ namespace BitcoinCalculator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (currencyselector.SelectedItem.ToString() == "EUR") 
+            if (bitcoinamountinput.Text.ToString() == "" || bitcoinamountinput.Text.ToString() == "0")
+            {
+                MessageBox.Show("Palun sisesta valuuta summa number");
+            }
+            
+            else if (currencyselector.Text.ToString() == "EUR" || currencyselector.Text.ToString() == "EEK")
             {
                 resultlabel.Visible = true;
                 tulemuslabel.Visible = true;
                 BitcoinRates newbitcoinrate = GetRates();
                 float result = float.Parse(bitcoinamountinput.Text) * (float)newbitcoinrate.Bpi.EUR.rate_float;
-                resultlabel.Text = $"{result} Bitcoini {newbitcoinrate.Bpi.EUR.code}";
+                resultlabel.Text = $"{result} {newbitcoinrate.Bpi.EUR.code}";
+                
+                if (currencyselector.Text.ToString() == "EEK")
+                {
+                    result *= (float)(15.64664);
+                    resultlabel.Text = $"{result} Bitcoini eesti kroonides";
+                }
+                else
+                {
+                    resultlabel.Text = $"{result} Bitcoini {newbitcoinrate.Bpi.EUR.code}";
+
+                }
+                
             }
+            else if (currencyselector.Text.ToString() == "GBP")
+            {
+                resultlabel.Visible = true;
+                tulemuslabel.Visible = true;
+                BitcoinRates newbitcoinrate = GetRates();
+                float result = float.Parse(bitcoinamountinput.Text) * (float)newbitcoinrate.Bpi.GBP.rate_float;
+                resultlabel.Text = $"{result} {newbitcoinrate.Bpi.GBP.code}";
+            }
+
+            else if (currencyselector.Text.ToString() == "USD")
+            {
+                resultlabel.Visible = true;
+                tulemuslabel.Visible = true;
+                BitcoinRates newbitcoinrate = GetRates();
+                float result = float.Parse(bitcoinamountinput.Text) * (float)newbitcoinrate.Bpi.USD.rate_float;
+                resultlabel.Text = $"{result} {newbitcoinrate.Bpi.USD.code}";
+            }
+
+           
+
+
         }
         public static BitcoinRates GetRates()
         {

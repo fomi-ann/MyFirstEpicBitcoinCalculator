@@ -45,7 +45,8 @@
             this.currencyselector.Items.AddRange(new object[] {
             "EUR",
             "USD",
-            "EEK"});
+            "EEK",
+            "GBP"});
             this.currencyselector.Location = new System.Drawing.Point(329, 247);
             this.currencyselector.Name = "currencyselector";
             this.currencyselector.Size = new System.Drawing.Size(179, 27);
@@ -73,6 +74,7 @@
             this.bitcoinamountinput.Name = "bitcoinamountinput";
             this.bitcoinamountinput.Size = new System.Drawing.Size(179, 20);
             this.bitcoinamountinput.TabIndex = 2;
+            this.bitcoinamountinput.Text = "1";
             // 
             // label1
             // 
