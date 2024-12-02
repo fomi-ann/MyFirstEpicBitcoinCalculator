@@ -27,11 +27,16 @@ namespace BitcoinCalculator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (bitcoinamountinput.Text.ToString() == "" || bitcoinamountinput.Text.ToString() == "0")
+            if (bitcoinamountinput.Text.ToString() == "")
             {
-                MessageBox.Show("Palun sisesta valuuta summa number");
+                MessageBox.Show("Oops! It looks like you forgot to enter a value. Please provide a number to proceed.");
             }
-            
+
+            else if (bitcoinamountinput.Text.ToString() == "0")
+            {
+                MessageBox.Show("The amount cannot be 0. Please enter a positive value.");
+            }
+
             else if (currencyselector.Text.ToString() == "EUR" || currencyselector.Text.ToString() == "EEK")
             {
                 resultlabel.Visible = true;
@@ -39,18 +44,18 @@ namespace BitcoinCalculator
                 BitcoinRates newbitcoinrate = GetRates();
                 float result = float.Parse(bitcoinamountinput.Text) * (float)newbitcoinrate.Bpi.EUR.rate_float;
                 resultlabel.Text = $"{result} {newbitcoinrate.Bpi.EUR.code}";
-                
+
                 if (currencyselector.Text.ToString() == "EEK")
                 {
                     result *= (float)(15.64664);
-                    resultlabel.Text = $"{result} Bitcoini eesti kroonides";
+                    resultlabel.Text = $"{result} EEK";
                 }
                 else
                 {
-                    resultlabel.Text = $"{result} Bitcoini {newbitcoinrate.Bpi.EUR.code}";
+                    resultlabel.Text = $"{result} {newbitcoinrate.Bpi.EUR.code}";
 
                 }
-                
+
             }
             else if (currencyselector.Text.ToString() == "GBP")
             {
@@ -70,6 +75,10 @@ namespace BitcoinCalculator
                 resultlabel.Text = $"{result} {newbitcoinrate.Bpi.USD.code}";
             }
 
+            else
+            {
+                MessageBox.Show("Please select a currency to convert to.");
+            }
            
 
 
